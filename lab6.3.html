@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Replacement</title>
+    <script>
+        function showMessage() {
+            const message = document.getElementById('message').value;
+            document.getElementById('display').innerText = message;
+        }
+
+        function replaceWord() {
+            const message = document.getElementById('message').value;
+            const searchWord = document.getElementById('searchWord').value;
+            const replaceWord = prompt('Enter the word to replace "' + searchWord + '" with:');
+            if (replaceWord !== null) {
+                const regex = new RegExp(searchWord, 'g');
+                const newMessage = message.replace(regex, replaceWord);
+                document.getElementById('display').innerText = newMessage;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <textarea id="message" rows="4" cols="50" placeholder="Enter your message here..."></textarea><br>
+        <input type="text" id="searchWord" placeholder="Enter word to search"><br>
+        <button type="button" onclick="showMessage()">Show Message</button>
+        <button type="button" onclick="replaceWord()">Replace Word</button>
+    </form>
+    <p id="display"></p>
+</body>
+</html>

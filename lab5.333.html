@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Manipulation</title>
+</head>
+<body>
+    <h1>Array Manipulation</h1>
+    
+    <div>
+        <h3>Enter a value to add:</h3>
+        <input type="text" id="valueInput" placeholder="e.g. 10">
+        <button onclick="addValueToArray()">Add Value to Array</button>
+    </div>
+    
+    <div>
+        <h3>Perform Operations:</h3>
+        <button onclick="performPush()">Push (Add to End)</button>
+        <button onclick="performPop()">Pop (Remove from End)</button>
+        <button onclick="performShift()">Shift (Remove from Start)</button>
+        <button onclick="performUnshift()">Unshift (Add to Start)</button>
+    </div>
+    
+    <div>
+        <h3>Current Array:</h3>
+        <p id="arrayDisplay">[]</p>
+    </div>
+    
+    <div>
+        <h3>Operation Results:</h3>
+        <p id="resultDisplay"></p>
+    </div>
+    
+    <script>
+        // Initialize an empty array
+        var myArray = [];
+        
+        // Update the array display
+        function updateArrayDisplay() {
+            document.getElementById("arrayDisplay").innerHTML = JSON.stringify(myArray);
+        }
+        
+        // Add value to array (this doesn't modify the array yet)
+        function addValueToArray() {
+            var inputValue = document.getElementById("valueInput").value.trim();
+            
+            if (inputValue !== "") {
+                // Convert to number if it's a number, otherwise keep as string
+                var value = isNaN(Number(inputValue)) ? inputValue : Number(inputValue);
+                
+                // Store in a variable for use with operations
+                window.currentValue = value;
+                
+                // Show message
+                document.getElementById("resultDisplay").innerHTML = "Value " + inputValue + " ready to use with operations.";
+                
+                // Clear input
+                document.getElementById("valueInput").value = "";
+            }
+        }
+        
+        // Perform push operation
+        function performPush() {
+            if (window.currentValue !== undefined) {
+                myArray.push(window.currentValue);
+                document.getElementById("resultDisplay").innerHTML = "Pushed " + window.currentValue + " to the end of the array.";
+                window.currentValue = undefined;
+                updateArrayDisplay();
+            } else {
+                document.getElementById("resultDisplay").innerHTML = "Please enter a value first.";
+            }
+        }
+        
+        // Perform pop operation
+        function performPop() {
+            if (myArray.length > 0) {
+                var poppedValue = myArray.pop();
+                document.getElementById("resultDisplay").innerHTML = "Popped " + poppedValue + " from the end of the array.";
+                updateArrayDisplay();
+            } else {
+                document.getElementById("resultDisplay").innerHTML = "Cannot pop from an empty array.";
+            }
+        }
+        
+        // Perform shift operation
+        function performShift() {
+            if (myArray.length > 0) {
+                var shiftedValue = myArray.shift();
+                document.getElementById("resultDisplay").innerHTML = "Shifted " + shiftedValue + " from the start of the array.";
+                updateArrayDisplay();
+            } else {
+                document.getElementById("resultDisplay").innerHTML = "Cannot shift from an empty array.";
+            }
+        }
+        
+        // Perform unshift operation
+        function performUnshift() {
+            if (window.currentValue !== undefined) {
+                myArray.unshift(window.currentValue);
+                document.getElementById("resultDisplay").innerHTML = "Unshifted " + window.currentValue + " to the start of the array.";
+                window.currentValue = undefined;
+                updateArrayDisplay();
+            } else {
+                document.getElementById("resultDisplay").innerHTML = "Please enter a value first.";
+            }
+        }
+        
+        // Add event listener for Enter key
+        document.getElementById("valueInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addValueToArray();
+            }
+        });
+    </script>
+</body>
+</html>

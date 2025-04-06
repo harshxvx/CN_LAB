@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store and Display Names</title>
+    <script>
+        // Initialize an empty array to store names
+        let names = [];
+
+        function addName() {
+            // Get the name from the input box
+            let nameInput = document.getElementById("nameInput").value;
+
+            // Add the name to the array
+            if (nameInput.trim() !== "") {
+                names.push(nameInput);
+            }
+
+            // Clear the input box
+            document.getElementById("nameInput").value = "";
+
+            // Display the names
+            displayNames();
+        }
+
+        function displayNames() {
+            // Create a string of all names separated by commas
+            let nameList = names.join(", ");
+
+            // Update the paragraph with the list of names
+            document.getElementById("nameList").innerText = "Names entered: " + nameList;
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter your name and see it added to the list!</h1>
+
+    <!-- Input box for entering names -->
+    <input type="text" id="nameInput" placeholder="Enter your name">
+
+    <!-- Button to add name -->
+    <button onclick="addName()">Add Name</button>
+
+    <!-- Paragraph to display the list of names -->
+    <p id="nameList">Names entered: </p>
+</body>
+</html>

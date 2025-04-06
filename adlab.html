@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        <title>Student Details and Grade</title>
+   
+  <script>
+    function showDetails() {
+      var name = document.getElementById("name").value;
+      var rollNumber = document.getElementById("rollNumber").value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var branch = document.getElementById("branch").value;
+      var marks = [];
+      for (var i = 1; i <= 5; i++) {
+        marks.push(document.getElementById("subject" + i).value);
+      }
+      var detailsParagraph = document.getElementById("details");
+      detailsParagraph.innerHTML = "Name: " + name + "<br>Roll Number: " + rollNumber + "<br>Gender: " + gender + "<br>Branch: " + branch + "<br>Marks: " + marks.join(", ");
+    }
+
+    function showGrades() {
+      var grades = [];
+      var totalMarks = 0;
+      for (var i = 1; i <= 5; i++) {
+        var mark = parseInt(document.getElementById("subject" + i).value);
+        totalMarks += mark;
+        if (mark >= 90) {
+          grades.push("O");
+        } else if (mark >= 80) {
+          grades.push("E");
+        } else if (mark >= 70) {
+          grades.push("A");
+        } else if (mark >= 60) {
+          grades.push("B");
+        } else if (mark >= 50) {
+          grades.push("C");
+        } else {
+          grades.push("F");
+        }
+      }
+      var averageMark = totalMarks / 5;
+      var averageGrade;
+      if (averageMark >= 90) {
+        averageGrade = "O";
+      } else if (averageMark >= 80) {
+        averageGrade = "E";
+      } else if (averageMark >= 70) {
+        averageGrade = "A";
+      } else if (averageMark >= 60) {
+        averageGrade = "B";
+      } else if (averageMark >= 50) {
+        averageGrade = "C";
+      } else {
+        averageGrade = "F";
+      }
+      var gradesParagraph = document.getElementById("grades");
+      gradesParagraph.innerHTML = "Grades: " + grades.join(", ") + "<br>Average Grade: " + averageGrade;
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><input type="text" id="name" name="name"></td>
+      </tr>
+      <tr>
+        <td>Roll Number:</td>
+        <td><input type="text" id="rollNumber" name="rollNumber"></td>
+      </tr>
+      <tr>
+        <td>Gender:</td>
+        <td>
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male">Male</label><br>
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">Female</label>
+        </td>
+      </tr>
+      <tr>
+        <td>Branch:</td>
+        <td>
+          <select id="branch" name="branch">
+            <option value="CSE">CSE</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Marks:</td>
+        <td>
+          <input type="number" id="subject1" name="subject A" placeholder="Subject A"><br>
+          <input type="number" id="subject2" name="subject B" placeholder="Subject B"><br>
+          <input type="number" id="subject3" name="subject C" placeholder="Subject C"><br>
+          <input type="number" id="subject4" name="subject D" placeholder="Subject D"><br>
+          <input type="number" id="subject5" name="subject E" placeholder="Subject E"><br>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="button" onclick="showDetails()">Show Details</button>
+          <button type="button" onclick="showGrades()">Show Grades</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <p id="details"></p>
+  <p id="grades"></p>
+</body>
+</html>

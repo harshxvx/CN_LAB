@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Search</title>
+    <script>
+        function searchWord() {
+            const inputString = document.getElementById('inputString').value;
+            const searchWord = document.getElementById('searchWord').value;
+            const resultParagraph = document.getElementById('result');
+            const regex = new RegExp(searchWord, 'i'); // 'i' for case-insensitive search
+
+            if (regex.test(inputString)) {
+                resultParagraph.textContent = "Word Found";
+            } else {
+                resultParagraph.textContent = "Word Not Found";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Word Search</h1>
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString" name="inputString"><br><br>
+    <label for="searchWord">Enter a word/phrase to search:</label>
+    <input type="text" id="searchWord" name="searchWord"><br><br>
+    <button onclick="searchWord()">Search</button>
+    <p id="result"></p>
+</body>
+</html>

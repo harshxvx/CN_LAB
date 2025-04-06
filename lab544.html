@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Builder and Search</title>
+</head>
+<body>
+    <h1>Enter Values One by One and Search</h1>
+    
+    <div>
+        <label for="valueInput">Enter a value:</label>
+        <input type="text" id="valueInput">
+        <button onclick="addToArray()">Add to Array</button>
+    </div>
+    
+    <div id="message" style="margin-top: 10px;"></div>
+    
+    <div style="margin-top: 10px;">
+        <span>Current Array: </span>
+        <span id="arrayDisplay">[]</span>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <input type="text" id="searchInput" placeholder="Enter value to search">
+        <button onclick="searchArray()">Search in Array</button>
+    </div>
+    
+    <div id="searchResult" style="margin-top: 10px;"></div>
+
+    <script>
+        // Initialize empty array
+        let myArray = [];
+        
+        function addToArray() {
+            const valueInput = document.getElementById('valueInput');
+            const value = valueInput.value.trim();
+            
+            if (value !== '') {
+                // Try to parse as number if possible
+                const numValue = isNaN(Number(value)) ? value : Number(value);
+                myArray.push(numValue);
+                
+                // Update the display
+                document.getElementById('arrayDisplay').textContent = JSON.stringify(myArray);
+                document.getElementById('message').textContent = `Added "${value}" to the array.`;
+                
+                // Clear the input field
+                valueInput.value = '';
+            }
+        }
+        
+        function searchArray() {
+            const searchInput = document.getElementById('searchInput');
+            const searchValue = searchInput.value.trim();
+            const searchResult = document.getElementById('searchResult');
+            
+            if (searchValue !== '') {
+                // Try to parse as number if possible for accurate comparison
+                const searchNumValue = isNaN(Number(searchValue)) ? searchValue : Number(searchValue);
+                
+                // Search for the value in the array
+                const index = myArray.findIndex(item => item === searchNumValue);
+                
+                if (index !== -1) {
+                    searchResult.textContent = `Found "${searchValue}" at index ${index}.`;
+                } else {
+                    searchResult.textContent = `Value "${searchValue}" not found in the array.`;
+                }
+                
+                // Clear the search input
+                searchInput.value = '';
+            }
+        }
+        
+        // Add event listeners for Enter key
+        document.getElementById('valueInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addToArray();
+            }
+        });
+        
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchArray();
+            }
+        });
+    </script>
+</body>
+</html>

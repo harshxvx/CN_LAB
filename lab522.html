@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personalized Greeting</title>
+    <script>
+        function displayGreeting() {
+            
+            let name = document.getElementById("nameInput").value;
+
+            
+            let greetingMessage = "Hello, " + name + "! How are you doing, welcome to the website";
+            
+            
+            document.getElementById("greeting").innerText = greetingMessage;
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter your name for a personalized greeting!</h1>
+
+   
+    <input type="text" id="nameInput" placeholder="Enter your name">
+
+    
+    <button onclick="displayGreeting()">Greet Me</button>
+
+   
+    <p id="greeting"></p>
+</body>
+</html>
